@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Code Challenge</string>
+    <string name="longform">Longform:</string>
+    <string name="shortform">Shortform:</string>
+    <string name="frequency">Frequency:</string>
+    <string name="since">Since:</string>
+    <string name="variations">Variations are given below:</string>
+    <string name="enter_min_3_char_searchview_hint">enter min 3 char e.g. HMM</string>
+    <string name="please_enter_minimum_3_characters">Please enter minimum 3 characters</string>
+</resources>

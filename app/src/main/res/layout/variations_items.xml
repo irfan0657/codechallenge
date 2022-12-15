@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="varItem"
+            type="com.example.codechallenge.data.model.AcromineResponse.AcromineResponseItem.Lf.Var" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp8"
+        android:background="@android:color/darker_gray"
+        android:padding="@dimen/dp8">
+
+        <TextView
+            android:id="@+id/txvLongform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/min_width_label"
+            android:text="@string/longform"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txvLongformValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp8"
+            android:text="@{varItem.lf.toString()}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txvLongform"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="description" />
+
+        <TextView
+            android:id="@+id/txvFrequency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp8"
+            android:minWidth="@dimen/min_width_label"
+            android:text="@string/frequency"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txvLongformValue" />
+
+        <TextView
+            android:id="@+id/txvFrequencyValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp8"
+            android:text="@{varItem.freq.toString()}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txvFrequency"
+            app:layout_constraintTop_toTopOf="@+id/txvFrequency"
+            tools:text="description" />
+
+        <TextView
+            android:id="@+id/txvSince"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp8"
+            android:minWidth="@dimen/min_width_label"
+            android:textStyle="bold"
+            android:text="@string/since"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txvFrequencyValue" />
+
+        <TextView
+            android:id="@+id/txvSinceValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp8"
+            android:text="@{varItem.since.toString()}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txvSince"
+            app:layout_constraintTop_toTopOf="@+id/txvSince"
+            tools:text="description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
