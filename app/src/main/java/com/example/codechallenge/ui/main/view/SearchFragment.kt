@@ -1,9 +1,11 @@
 package com.example.codechallenge.ui.main.view
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -15,6 +17,7 @@ import com.example.codechallenge.databinding.FragmentSearchBinding
 import com.example.codechallenge.ui.main.adapter.LongAdapter
 import com.example.codechallenge.ui.main.viewmodel.SearchViewModel
 import com.example.codechallenge.utils.Constants
+import com.example.codechallenge.utils.NetworkUtil
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,7 +41,7 @@ class SearchFragment : Fragment() {
         val longformRVAdapter = LongAdapter()
         binding.recyclerView.adapter = longformRVAdapter
 
-        viewModel.searchResponceLiveData.observe(viewLifecycleOwner) {
+        viewModel.searchResponseLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is ResponceResult.Empty -> {
                     binding.progressBar.visibility = View.GONE
@@ -65,14 +68,19 @@ class SearchFragment : Fragment() {
         }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            @RequiresApi(Build.VERSION_CODES.M)
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query.isNullOrEmpty()) {
                     showSnackBar(getString(R.string.please_enter_minimum_3_characters))
                 } else if (query.trim().isEmpty()) {
                     showSnackBar(getString(R.string.please_enter_minimum_3_characters))
-                } else if (query.length >= Constants.Constants.THREE) {
-                    binding.progressBar.visibility = View.VISIBLE
-                    viewModel.getSearchItem(query)
+                } else if (query.length >= Constants.THREE) {
+                    if (context?.let { NetworkUtil.isOnline(it.applicationContext) } == true) {
+                        binding.progressBar.visibility = View.VISIBLE
+                        viewModel.getSearchItem(query)
+                    } else {
+                        showSnackBar(getString(R.string.please_check_internet_connection))
+                    }
                 } else {
                     showSnackBar(getString(R.string.please_enter_minimum_3_characters))
                 }
@@ -82,7 +90,6 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
                     longformRVAdapter.submitList(null)
-                    showSnackBar(getString(R.string.please_enter_minimum_3_characters))
                 }
                 return false
             }

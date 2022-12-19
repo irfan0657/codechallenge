@@ -7,4 +7,5 @@
     <string name="variations">Variations are given below:</string>
     <string name="enter_min_3_char_searchview_hint">enter min 3 char e.g. HMM</string>
     <string name="please_enter_minimum_3_characters">Please enter minimum 3 characters</string>
+    <string name="please_check_internet_connection">No Internet Connection</string>
 </resources>

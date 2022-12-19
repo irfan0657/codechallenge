@@ -13,21 +13,21 @@ class MainRepository @Inject constructor(private val webApi: WebApi) {
     /**
      * observing the responce mutableLiveData
      */
-    private val _acromineResponceLiveData = MutableLiveData<ResponceResult<ArrayList<AcromineResponse.AcromineResponseItem>>>()
-    val searchResponceLiveData: LiveData<ResponceResult<ArrayList<AcromineResponse.AcromineResponseItem>>>
-        get() = _acromineResponceLiveData
+    private val _acromineResponseLiveData = MutableLiveData<ResponceResult<ArrayList<AcromineResponse.AcromineResponseItem>>>()
+    val searchResponseLiveData: LiveData<ResponceResult<ArrayList<AcromineResponse.AcromineResponseItem>>>
+        get() = _acromineResponseLiveData
 
     suspend fun getAcromineResult(sf: String) {
         val result = webApi.getAcromine(sf)
         if (result.body() != null) {
             if (result.body()!!.isEmpty()) {
-                _acromineResponceLiveData.postValue(ResponceResult.Error("No results found for \"$sf\""))
+                _acromineResponseLiveData.postValue(ResponceResult.Error("No results found for \"$sf\""))
             } else
-                _acromineResponceLiveData.postValue(ResponceResult.Success(result.body()))
+                _acromineResponseLiveData.postValue(ResponceResult.Success(result.body()))
         } else if (result.errorBody() != null) {
-            _acromineResponceLiveData.postValue(ResponceResult.Error(result.message()))
+            _acromineResponseLiveData.postValue(ResponceResult.Error(result.message()))
         } else {
-            _acromineResponceLiveData.postValue(ResponceResult.Error("Something went wrong"))
+            _acromineResponseLiveData.postValue(ResponceResult.Error("Something went wrong"))
         }
     }
 }

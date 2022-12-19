@@ -1,8 +1,8 @@
 package com.example.codechallenge.di
 
 import com.example.codechallenge.data.network.WebApi
-import com.example.codechallenge.utils.Constants.Constants.BASE_URL
-import com.example.codechallenge.utils.Constants.Constants.timeout
+import com.example.codechallenge.utils.Constants.BASE_URL
+import com.example.codechallenge.utils.Constants.timeout
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

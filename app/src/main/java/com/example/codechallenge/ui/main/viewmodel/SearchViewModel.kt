@@ -10,7 +10,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(private val mainRepository: MainRepository) :
     ViewModel() {
-    val searchResponceLiveData get() = mainRepository.searchResponceLiveData
+    val searchResponseLiveData get() = mainRepository.searchResponseLiveData
     fun getSearchItem(sf: String) {
         viewModelScope.launch {
             mainRepository.getAcromineResult(sf)
