@@ -1,11 +1,10 @@
 package com.example.codechallenge.ui.main.view
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import android.widget.SearchView.OnCloseListener
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -68,7 +67,6 @@ class SearchFragment : Fragment() {
         }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            @RequiresApi(Build.VERSION_CODES.M)
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query.isNullOrEmpty()) {
                     showSnackBar(getString(R.string.please_enter_minimum_3_characters))
@@ -88,11 +86,22 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText.isNullOrEmpty()) {
+                val query = newText?.trim()
+                if (query.isNullOrEmpty()) {
                     longformRVAdapter.submitList(null)
                 }
-                return false
+                if (newText?.isNotEmpty() == true && newText.isBlank()) {
+                    binding.searchView.setQuery("", false)
+                }
+                return true
             }
+        })
+        binding.searchView.setOnCloseListener(object : OnCloseListener, SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                binding.searchView.isIconified = false
+                return true
+            }
+
         })
     }
 
